@@ -2,6 +2,7 @@
     #fastAPI
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import Response
+from fastapi.middleware.cors import CORSMiddleware
     #Uvicorn
 #uv
     #Docker (nrq'd)
@@ -12,6 +13,14 @@ import numpy as np
 
 #fastAPI
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://RAFM-EBSD-ITP5.github.io"],
+    allow_credentials=False,
+    allow_methods=["POST", "GET", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 @app.post("/img_inbox")
 #should be either .tif/.png
